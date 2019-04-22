@@ -8,7 +8,7 @@ services:
       - "MYSQL_ROOT_PASSWORD=root"
       - "MYSQL_DATABASE=replicas_db"
     volumes:
-      - v1_master_db/db: /var/lib/mysql
+      - v1_master_db: /var/lib/mysql
       - v1_master_backup: /backup:/home/backup
       - v1_master_conf: /etc/mysql/conf.d
     links:
@@ -34,9 +34,9 @@ services:
     hostname: mysql-slave
 
 volumes:
-  - v1_master_db: './master/data/db'
-  - v1_master_backup: './master/data/backup'
-  - v1_master_conf: './master/data/db'
-  - v1_slave_db: './slave/data/db'
-  - v1_slave_backup: './slave/data/backup'
-  - v1_slave_conf: './slave/data/db'
+  v1_master_db: './master/data/db'
+  v1_master_backup: './master/data/backup'
+  v1_master_conf: './master/data/db'
+  v1_slave_db: './slave/data/db'
+  v1_slave_backup: './slave/data/backup'
+  v1_slave_conf: './slave/data/db'
