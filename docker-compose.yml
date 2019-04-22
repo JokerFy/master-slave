@@ -1,0 +1,42 @@
+version: '2'
+services:
+  mysql-master:
+    build:
+      context: ./
+      dockerfile: master/Dockerfile
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=replicas_db"
+    volumes:
+      - v1_master_db/db:/var/lib/mysql
+      - v1_master_backup/backup:/home/backup
+      - v1_master_conf:/etc/mysql/conf.d
+    links:
+      - mysql-slave
+    ports:
+      - "3307:3306"
+    restart: always
+    hostname: mysql-master
+  mysql-slave:
+    build:
+      context: ./
+      dockerfile: slave/Dockerfile
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=replicas_db"
+    volumes:
+      - v1_slave_db:/var/lib/mysql
+      - v1_slave_backup:/home/backup
+      - v1_slave_conf:/etc/mysql/conf.d
+    ports:
+      - "3308:3306"
+    restart: always
+    hostname: mysql-slave
+
+volumes:
+  - v1_master_db: './master/data/db',
+  - v1_master_backup: './master/data/backup',
+  - v1_master_conf: './master/data/db',
+  - v1_slave_db: './slave/data/db',
+  - v1_slave_backup: './slave/data/backup',
+  - v1_slave_conf: './slave/data/db',
