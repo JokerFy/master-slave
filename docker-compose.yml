@@ -9,7 +9,7 @@ services:
       - "MYSQL_DATABASE=replicas_db"
     volumes:
       - ./master/data/db:/var/lib/mysql
-      - ./master/data/backup:/backup:/home/backup
+      - ./master/data/backup:/home/backup
       - ./master/conf:/etc/mysql/conf.d
     links:
       - mysql-slave
