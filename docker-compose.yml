@@ -8,9 +8,9 @@ services:
       - "MYSQL_ROOT_PASSWORD=root"
       - "MYSQL_DATABASE=replicas_db"
     volumes:
-      - v1_master_db/db:/var/lib/mysql
-      - v1_master_backup/backup:/home/backup
-      - v1_master_conf:/etc/mysql/conf.d
+      - v1_master_db/db: /var/lib/mysql
+      - v1_master_backup: /backup:/home/backup
+      - v1_master_conf: /etc/mysql/conf.d
     links:
       - mysql-slave
     ports:
@@ -25,9 +25,9 @@ services:
       - "MYSQL_ROOT_PASSWORD=root"
       - "MYSQL_DATABASE=replicas_db"
     volumes:
-      - v1_slave_db:/var/lib/mysql
-      - v1_slave_backup:/home/backup
-      - v1_slave_conf:/etc/mysql/conf.d
+      - v1_slave_db: /var/lib/mysql
+      - v1_slave_backup: /home/backup
+      - v1_slave_conf: /etc/mysql/conf.d
     ports:
       - "3308:3306"
     restart: always
