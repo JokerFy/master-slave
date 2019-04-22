@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mysql-master:
     build:
@@ -34,9 +34,9 @@ services:
     hostname: mysql-slave
 
 volumes:
-  - v1_master_db: './master/data/db',
-  - v1_master_backup: './master/data/backup',
-  - v1_master_conf: './master/data/db',
-  - v1_slave_db: './slave/data/db',
-  - v1_slave_backup: './slave/data/backup',
-  - v1_slave_conf: './slave/data/db',
+  - v1_master_db: './master/data/db'
+  - v1_master_backup: './master/data/backup'
+  - v1_master_conf: './master/data/db'
+  - v1_slave_db: './slave/data/db'
+  - v1_slave_backup: './slave/data/backup'
+  - v1_slave_conf: './slave/data/db'
